@@ -63,7 +63,10 @@ public class MovieArrayAdapter extends ArrayAdapter<Movie> {
         } else if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
             movieImagePath = movie.getBackdropPath();
         }
-        Picasso.with(getContext()).load(movieImagePath).into(viewHolder.ivMovieImage);
+        Picasso.with(getContext())
+                .load(movieImagePath)
+                .placeholder(R.drawable.movie_placeholder)
+                .into(viewHolder.ivMovieImage);
 
         return convertView;
     }
