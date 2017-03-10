@@ -10,6 +10,7 @@ import java.util.List;
 public class Movie {
 
     private String posterPath;
+    private String backdropPath;
     private String overview;
     private String originalTitle;
 
@@ -17,10 +18,15 @@ public class Movie {
         this.posterPath = jsonObject.getString("poster_path");
         this.overview = jsonObject.getString("overview");
         this.originalTitle = jsonObject.getString("original_title");
+        this.backdropPath = jsonObject.getString("backdrop_path");
     }
 
     public String getPosterPath() {
         return String.format("https://image.tmdb.org/t/p/w342/%s", posterPath);
+    }
+
+    public String getBackdropPath() {
+        return String.format("https://image.tmdb.org/t/p/w780/%s", backdropPath);
     }
 
     public String getOverview() {
