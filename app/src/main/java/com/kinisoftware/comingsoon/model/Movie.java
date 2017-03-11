@@ -9,16 +9,23 @@ import java.util.List;
 
 public class Movie {
 
+    public enum MovieType {
+        ORDINAL,
+        POPULAR
+    }
+
     private String posterPath;
     private String backdropPath;
     private String overview;
     private String originalTitle;
+    private int voteAverage;
 
     public Movie(JSONObject jsonObject) throws JSONException {
         this.posterPath = jsonObject.getString("poster_path");
         this.overview = jsonObject.getString("overview");
         this.originalTitle = jsonObject.getString("original_title");
         this.backdropPath = jsonObject.getString("backdrop_path");
+        this.voteAverage = jsonObject.getInt("vote_average");
     }
 
     public String getPosterPath() {
@@ -45,5 +52,12 @@ public class Movie {
         }
 
         return movies;
+    }
+
+    public MovieType getType() {
+        if (voteAverage >= 7) {
+            return MovieType.POPULAR;
+        }
+        return MovieType.ORDINAL;
     }
 }
