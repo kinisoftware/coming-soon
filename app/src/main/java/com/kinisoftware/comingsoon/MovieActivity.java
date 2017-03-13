@@ -2,9 +2,10 @@ package com.kinisoftware.comingsoon;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.ListView;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 
-import com.kinisoftware.comingsoon.adapter.MovieArrayAdapter;
+import com.kinisoftware.comingsoon.adapter.MoviesAdapter;
 import com.kinisoftware.comingsoon.model.Movie;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -21,18 +22,19 @@ import cz.msebera.android.httpclient.Header;
 public class MovieActivity extends AppCompatActivity {
 
     List<Movie> movies;
-    MovieArrayAdapter movieAdapter;
-    ListView lvMovies;
+    MoviesAdapter movieAdapter;
+    RecyclerView lvMovies;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie);
 
-        lvMovies = (ListView) findViewById(R.id.lvMovies);
+        lvMovies = (RecyclerView) findViewById(R.id.lvMovies);
         movies = new ArrayList<>();
-        movieAdapter = new MovieArrayAdapter(this, movies);
+        movieAdapter = new MoviesAdapter(movies);
         lvMovies.setAdapter(movieAdapter);
+        lvMovies.setLayoutManager(new LinearLayoutManager(this));
 
         String url = "https://api.themoviedb.org/3/movie/now_playing?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed";
         AsyncHttpClient asyncHttpClient = new AsyncHttpClient();
